@@ -17,7 +17,7 @@ export default function HeroSlider({ slides, locale }) {
 
   if (!slides || slides.length === 0) {
     return (
-      <div className="w-full h-[60vh] bg-gray-100 flex items-center justify-center">
+      <div className="w-full h-[600px] bg-gray-100 flex items-center justify-center">
         <h2 className="text-2xl text-gray-400 font-semibold opacity-50">
           No slides available
         </h2>
@@ -25,18 +25,34 @@ export default function HeroSlider({ slides, locale }) {
     );
   }
 
+  const getSlideState = (index, current, total) => {
+    if (index === current) return 'active';
+    if (index === (current - 1 + total) % total) return 'prev';
+    return 'next';
+  };
+
+  const slideStyles = {
+    active: { left: '0%', opacity: 1, zIndex: 10 },
+    prev: { left: '-100%', opacity: 0, zIndex: 0 },
+    next: { left: '100%', opacity: 0, zIndex: 0 },
+  };
+
   return (
-    <div className="relative w-full h-[55vh] md:h-[70vh] overflow-hidden">
+    <div className="relative w-full h-[600px] overflow-hidden">
       {slides.map((slide, index) => {
         const imageUrl = slide.image ? urlFor(slide.image).width(1920).height(1080).url() : '';
         const caption = slide.caption?.[locale] || '';
+        const state = getSlideState(index, currentIndex, slides.length);
+        const currentStyle = slideStyles[state];
         
         return (
           <div 
             key={slide._key || index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
+            className="absolute w-full h-full"
+            style={{
+              ...currentStyle,
+              transition: 'left 2s ease-in-out, opacity 2s ease-in-out'
+            }}
           >
             {imageUrl && (
               <Image 
@@ -53,10 +69,15 @@ export default function HeroSlider({ slides, locale }) {
 
             {/* Caption Content */}
             {caption && (
-              <div className="absolute inset-0 flex items-center justify-center px-4">
-                <h2 className="text-3xl md:text-5xl lg:text-5xl font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)] text-center max-w-4xl tracking-wide">
-                  {caption}
-                </h2>
+              <div 
+                className="absolute left-1/2 bottom-[45%] bg-black/20 text-white text-center font-bold rounded-[5px] px-3 py-2 min-w-[90%] md:min-w-[50%] text-2xl md:text-4xl"
+                style={{
+                  transform: state === 'active' ? 'translate(-50%, 0)' : 'translate(-50%, 30px)',
+                  opacity: state === 'active' ? 1 : 0,
+                  transition: 'opacity 1s ease-in-out 1s, transform 1s ease-in-out 1s'
+                }}
+              >
+                {caption}
               </div>
             )}
           </div>
