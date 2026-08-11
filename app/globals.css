@@ -1,26 +1,103 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #f8f9fa;
+  --foreground: #1a1a2e;
+  --primary: #16213e;
+  --primary-light: #0f3460;
+  --accent: #e94560;
+  --accent-light: #f5a623;
+  --surface: #ffffff;
+  --surface-alt: #f0f4f8;
+  --border: #e2e8f0;
+  --text-muted: #64748b;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+/* RTL-aware font stack */
+[dir="rtl"] body,
+[dir="rtl"] * {
+  font-family: "Segoe UI", "Tahoma", "Arial", sans-serif;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface-alt);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+  border-radius: 3px;
+}
+
+/* Portable Text / prose styles */
+.prose h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.75rem;
+  color: var(--primary);
+}
+.prose h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.5rem;
+  color: var(--primary-light);
+}
+.prose p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+  color: #374151;
+}
+.prose ul,
+.prose ol {
+  margin: 0.75rem 0 1rem;
+  padding-inline-start: 1.5rem;
+}
+.prose li {
+  margin-bottom: 0.35rem;
+  line-height: 1.7;
+}
+.prose strong {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Responsive table for @sanity/table inside Portable Text */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.925rem;
+  overflow-x: auto;
+  display: block;
+}
+.prose table thead {
+  background: var(--primary);
+  color: #ffffff;
+}
+.prose table th,
+.prose table td {
+  border: 1px solid var(--border);
+  padding: 0.6rem 0.85rem;
+  text-align: start;
+  white-space: nowrap;
+}
+.prose table tbody tr:nth-child(even) {
+  background: var(--surface-alt);
+}
+.prose table tbody tr:hover {
+  background: #e8f0fe;
 }
