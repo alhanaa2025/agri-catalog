@@ -8,7 +8,29 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     welcomeText,
     aboutUsText,
     contactEmail,
-    phoneNumbers
+    phoneNumbers,
+    location
+  }
+`);
+
+export const FEATURED_CATEGORIES_QUERY = defineQuery(`
+  *[_type == "category"] | order(_createdAt asc) [0..3] {
+    _id,
+    title,
+    "slug": slug.current,
+    image
+  }
+`);
+
+export const FEATURED_PRODUCTS_QUERY = defineQuery(`
+  *[_type == "product"] | order(_createdAt desc) [0..7] {
+    _id,
+    title,
+    "slug": slug.current,
+    image,
+    activeIngredient,
+    "categorySlug": subcategory->category->slug.current,
+    "subcategorySlug": subcategory->slug.current
   }
 `);
 

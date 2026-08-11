@@ -14,8 +14,8 @@ export default function Navbar({ settings, locale }) {
   const siteTitle = settings?.siteTitle?.[locale] || 'AgriCatalog';
   const logoUrl = settings?.logo ? urlFor(settings.logo).height(80).url() : null;
 
-  const handleLanguageSwitch = (newLocale) => {
-    if (!pathname) return;
+  const handleLanguageSwitch = () => {
+    const newLocale = locale === 'ar' ? 'en' : 'ar';
     const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
     router.push(newPath);
   };
@@ -31,18 +31,13 @@ export default function Navbar({ settings, locale }) {
     <header className="sticky top-0 z-50 w-full bg-[#131b2f] shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-[72px]">
-          {/* Logo Section */}
+
+          {/* Logo */}
           <Link href={`/${locale}`} className="flex items-center gap-2">
             {logoUrl ? (
-              <Image 
-                src={logoUrl} 
-                alt={siteTitle} 
-                width={32} 
-                height={32} 
-                className="object-contain"
-              />
+              <Image src={logoUrl} alt={siteTitle} width={36} height={36} className="object-contain" />
             ) : (
-              <svg className="w-6 h-6 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg className="w-7 h-7 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
                 <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
               </svg>
@@ -50,60 +45,53 @@ export default function Navbar({ settings, locale }) {
             <span className="font-bold text-[17px] text-white tracking-wide">{siteTitle}</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
-                <Link 
-                  key={link.href} 
+                <Link
+                  key={link.href}
                   href={link.href}
-                  className={`text-[13px] font-semibold transition-colors px-5 py-2 rounded-[4px] ${
-                    isActive 
-                      ? 'bg-[#f43f5e] text-white' 
-                      : 'text-white/90 hover:text-white'
+                  className={`text-[13px] font-semibold px-5 py-2 rounded-[4px] transition-colors ${
+                    isActive ? 'bg-[#f43f5e] text-white' : 'text-white/90 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   {link.name}
                 </Link>
               );
             })}
-            
-            <button 
-              onClick={() => handleLanguageSwitch(locale === 'ar' ? 'en' : 'ar')}
-              className="ml-2 px-5 py-1.5 rounded-[4px] border border-[#f43f5e] text-[13px] font-semibold text-[#f43f5e] hover:bg-[#f43f5e]/10 transition-colors"
+            <button
+              onClick={handleLanguageSwitch}
+              className="ms-3 px-5 py-1.5 rounded-[4px] border border-[#f43f5e] text-[13px] font-semibold text-[#f43f5e] hover:bg-[#f43f5e]/10 transition-colors"
             >
               {locale === 'ar' ? 'English' : 'عربى'}
             </button>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden p-2 text-white"
-            onClick={() => setIsOpen(!isOpen)}
-          >
+          {/* Mobile Toggle */}
+          <button className="md:hidden p-2 text-white" onClick={() => setIsOpen(!isOpen)}>
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
+              {isOpen
+                ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              }
             </svg>
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
-      {isOpen && (
-        <div className="md:hidden bg-[#131b2f] border-t border-white/10 px-4 pt-2 pb-4 space-y-1 shadow-lg">
+      {/* Mobile Menu */}
+      <div className={`md:hidden overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-72' : 'max-h-0'}`}>
+        <div className="bg-[#0e1525] border-t border-white/10 px-4 pt-2 pb-4 space-y-1">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
-              <Link 
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className={`block px-3 py-2 rounded-md text-[14px] font-medium ${
+                className={`block px-3 py-2.5 rounded-md text-[14px] font-medium ${
                   isActive ? 'bg-[#f43f5e] text-white' : 'text-white/80 hover:text-white hover:bg-white/5'
                 }`}
               >
@@ -111,17 +99,14 @@ export default function Navbar({ settings, locale }) {
               </Link>
             );
           })}
-          <button 
-            onClick={() => {
-              handleLanguageSwitch(locale === 'ar' ? 'en' : 'ar');
-              setIsOpen(false);
-            }}
-            className="w-full text-start px-3 py-2 rounded-md text-[14px] font-medium text-[#f43f5e] hover:bg-[#f43f5e]/10"
+          <button
+            onClick={() => { handleLanguageSwitch(); setIsOpen(false); }}
+            className="w-full text-start px-3 py-2.5 rounded-md text-[14px] font-medium text-[#f43f5e] hover:bg-[#f43f5e]/10"
           >
             {locale === 'ar' ? 'Switch to English' : 'التبديل للعربية'}
           </button>
         </div>
-      )}
+      </div>
     </header>
   );
 }
