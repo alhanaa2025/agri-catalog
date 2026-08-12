@@ -90,7 +90,7 @@ export default async function HomePage({ params }) {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-2xl font-black text-[#131b2f]">{settings?.aboutUsBadgeValue || '100%'}</p>
+                  <p className="text-2xl font-black text-[#131b2f]">100%</p>
                   <p className="text-sm font-semibold text-gray-500">
                     {settings?.aboutUsBadgeText?.[locale] || (locale === 'ar' ? 'شركاء موثوقون' : 'Trusted Partners')}
                   </p>

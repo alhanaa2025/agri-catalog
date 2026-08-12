@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+﻿import { defineType, defineField } from 'sanity'
 import { CogIcon } from '@sanity/icons/Cog'
 
 export const siteSettings = defineType({
@@ -17,16 +17,17 @@ export const siteSettings = defineType({
       name: 'siteTitle',
       title: 'Site Title',
       type: 'localeString',
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'logo',
-      title: 'Logo',
+      title: 'Site Logo',
       type: 'image',
       options: { hotspot: true },
     }),
     defineField({
       name: 'heroSlides',
-      title: 'Home Page Slider',
+      title: 'Hero Slides',
       type: 'array',
       of: [
         {
@@ -34,32 +35,16 @@ export const siteSettings = defineType({
           name: 'slide',
           title: 'Slide',
           fields: [
-            defineField({
-              name: 'image',
-              title: 'Image',
-              type: 'image',
-              options: { hotspot: true },
-            }),
-            defineField({
-              name: 'caption',
-              title: 'Caption',
-              type: 'localeString',
-            }),
+            defineField({ name: 'image', title: 'Background Image', type: 'image', options: { hotspot: true } }),
+            defineField({ name: 'tagline', title: 'Tagline', type: 'localeString' }),
+            defineField({ name: 'headline', title: 'Headline', type: 'localeString' }),
+            defineField({ name: 'description', title: 'Description', type: 'localeText' }),
+            defineField({ name: 'primaryButtonText', title: 'Primary Button Text', type: 'localeString' }),
+            defineField({ name: 'primaryButtonLink', title: 'Primary Button Link', type: 'string' }),
           ],
-          preview: {
-            select: {
-              title: 'caption.en',
-              media: 'image',
-            },
-          },
+          preview: { select: { title: 'headline.en', media: 'image' } },
         },
       ],
-      validation: (rule) => rule.max(3),
-    }),
-    defineField({
-      name: 'welcomeText',
-      title: 'Home Page Welcome Text',
-      type: 'localeText',
     }),
     defineField({
       name: 'aboutUsText',
@@ -77,6 +62,11 @@ export const siteSettings = defineType({
       title: 'Phone Numbers',
       type: 'array',
       of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'location',
+      title: 'Physical Location',
+      type: 'localeString',
     }),
 
     // --- About Section ---
@@ -105,12 +95,6 @@ export const siteSettings = defineType({
       title: 'About Us Image',
       type: 'image',
       options: { hotspot: true },
-      fieldset: 'aboutSection',
-    }),
-    defineField({
-      name: 'aboutUsBadgeValue',
-      title: 'Badge Value (e.g. 100%)',
-      type: 'string',
       fieldset: 'aboutSection',
     }),
     defineField({

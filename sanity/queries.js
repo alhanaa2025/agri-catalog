@@ -1,11 +1,10 @@
-import { defineQuery } from "next-sanity";
+﻿import { defineQuery } from "next-sanity";
 
 export const SITE_SETTINGS_QUERY = defineQuery(`
   *[_id == "siteSettings"][0]{
     siteTitle,
     logo,
     heroSlides,
-    welcomeText,
     aboutUsText,
     contactEmail,
     phoneNumbers,
@@ -14,7 +13,6 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     aboutUsTitle,
     aboutUsBullets,
     aboutUsImage,
-    aboutUsBadgeValue,
     aboutUsBadgeText,
     categoriesTitle,
     corePrinciplesTitle,
@@ -48,7 +46,6 @@ export const FEATURED_PRODUCTS_QUERY = defineQuery(`
     title,
     "slug": slug.current,
     image,
-    activeIngredient,
     "categorySlug": subcategory->category->slug.current,
     "subcategorySlug": subcategory->slug.current
   }
@@ -67,7 +64,8 @@ export const CATEGORY_BY_SLUG_QUERY = defineQuery(`
   *[_type == "category" && slug.current == $slug][0]{
     _id,
     title,
-    "slug": slug.current
+    "slug": slug.current,
+    image
   }
 `);
 
@@ -95,7 +93,7 @@ export const PRODUCTS_BY_SUBCATEGORY_QUERY = defineQuery(`
     title,
     "slug": slug.current,
     image,
-    activeIngredient
+    "categorySlug": subcategory->category->slug.current
   }
 `);
 
@@ -104,10 +102,14 @@ export const PRODUCT_BY_SLUG_QUERY = defineQuery(`
     _id,
     title,
     "slug": slug.current,
+    bannerImage,
     image,
-    activeIngredient,
+    featuresAndBenefits,
     description,
+    applicationRate,
     "subcategorySlug": subcategory->slug.current,
-    "categorySlug": subcategory->category->slug.current
+    "subcategoryTitle": subcategory->title,
+    "categorySlug": subcategory->category->slug.current,
+    "categoryTitle": subcategory->category->title
   }
 `);

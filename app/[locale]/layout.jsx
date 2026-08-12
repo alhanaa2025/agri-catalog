@@ -14,7 +14,7 @@ export async function generateMetadata({ params }) {
   const title = settings?.siteTitle?.[locale] || 'AgriCatalog';
   return {
     title,
-    description: settings?.welcomeText?.[locale] || 'Catalog for agricultural products',
+    description: 'Catalog for agricultural products',
   };
 }
 
