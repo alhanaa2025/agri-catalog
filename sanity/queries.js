@@ -9,7 +9,27 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
     aboutUsText,
     contactEmail,
     phoneNumbers,
-    location
+    location,
+    aboutUsPreHeader,
+    aboutUsTitle,
+    aboutUsBullets,
+    aboutUsImage,
+    aboutUsBadgeValue,
+    aboutUsBadgeText,
+    categoriesTitle,
+    corePrinciplesTitle,
+    corePrinciplesSubtitle,
+    corePrinciplesCards,
+    aboutPageBanner,
+    aboutPageStoryTitle,
+    aboutPageStory,
+    aboutPageStats,
+    aboutPageCertificatesTitle,
+    aboutPageCertificatesSubtitle,
+    certificates[]{
+      title,
+      "imageUrl": image.asset->url
+    }
   }
 `);
 

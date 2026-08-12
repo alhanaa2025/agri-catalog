@@ -23,16 +23,16 @@ export default function Footer({ settings, locale }) {
 
           {/* Column 1: Logo & Tagline */}
           <div>
-            <Link href={`/${locale}`} className="flex items-center gap-2 mb-4">
+            <Link href={`/${locale}`} className="flex items-center gap-3 mb-4">
               {logoUrl ? (
-                <Image src={logoUrl} alt={siteTitle} width={40} height={40} className="object-contain" />
+                <Image src={logoUrl} alt={siteTitle} width={200} height={60} className="object-contain h-12 w-auto" />
               ) : (
-                <svg className="w-8 h-8 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg className="w-9 h-9 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
                   <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
                 </svg>
               )}
-              <span className="font-bold text-lg text-white">{siteTitle}</span>
+              <span className="font-bold text-xl text-white">{siteTitle}</span>
             </Link>
             <p className="text-white/60 text-sm leading-relaxed max-w-xs">
               {locale === 'ar'
