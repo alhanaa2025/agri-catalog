@@ -22,9 +22,9 @@ export default async function HomePage({ params }) {
       <HeroSlider slides={settings?.heroSlides} locale={locale} />
 
       {/* ─── Section 2: About Teaser ─── */}
-      <section className="relative py-24 bg-white overflow-hidden">
+      <section className="relative py-12 md:py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             
             {/* Column 1: Content */}
             <div className="flex flex-col items-start text-start">
@@ -71,7 +71,7 @@ export default async function HomePage({ params }) {
             </div>
 
             {/* Column 2: Visuals */}
-            <div className="relative mt-10 md:mt-0">
+            <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] w-full border border-gray-100">
                 <Image 
                   src={settings?.aboutUsImage ? urlFor(settings.aboutUsImage).width(1200).url() : "https://images.unsplash.com/photo-1592982537447-6f296d11f810?q=80&w=1200&auto=format&fit=crop"}
