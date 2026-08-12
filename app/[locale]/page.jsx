@@ -61,7 +61,7 @@ export default async function HomePage({ params }) {
 
               <Link
                 href={`/${locale}/about`}
-                className="inline-flex items-center gap-2 bg-[#131b2f] hover:bg-[#131b2f]/90 text-white font-semibold px-8 py-3.5 rounded-lg transition-colors"
+                className="hidden md:inline-flex items-center gap-2 bg-[#131b2f] hover:bg-[#131b2f]/90 text-white font-semibold px-8 py-3.5 rounded-lg transition-colors"
               >
                 {locale === 'ar' ? 'اقرأ المزيد' : 'Read More'}
                 <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,6 +98,19 @@ export default async function HomePage({ params }) {
               </div>
             </div>
 
+          </div>
+
+          {/* Mobile-only Read More Button (Below Image) */}
+          <div className="mt-8 flex md:hidden">
+            <Link
+              href={`/${locale}/about`}
+              className="inline-flex items-center justify-center gap-2 bg-[#131b2f] hover:bg-[#131b2f]/90 text-white font-semibold px-8 py-3.5 rounded-lg transition-colors w-full sm:w-auto"
+            >
+              {locale === 'ar' ? 'اقرأ المزيد' : 'Read More'}
+              <svg className="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
