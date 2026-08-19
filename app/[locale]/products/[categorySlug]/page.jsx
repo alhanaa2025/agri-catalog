@@ -1,4 +1,4 @@
-﻿import Image from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import { client, urlFor } from '@/sanity/client';
 import {
@@ -17,6 +17,9 @@ export async function generateStaticParams() {
         params.push({ locale, categorySlug: cat.slug });
       }
     }
+  }
+  if (params.length === 0) {
+    params.push({ locale: 'en', categorySlug: '_' });
   }
   return params;
 }

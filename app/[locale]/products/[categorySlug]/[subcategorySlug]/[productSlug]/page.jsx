@@ -1,4 +1,4 @@
-﻿import Image from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { client, urlFor } from '@/sanity/client';
@@ -26,6 +26,11 @@ export async function generateStaticParams() {
         }
       }
     }
+  }
+  // Static export requires at least one param — add a placeholder so the
+  // build never fails when Sanity has no products yet.
+  if (params.length === 0) {
+    params.push({ locale: 'en', categorySlug: '_', subcategorySlug: '_', productSlug: '_' });
   }
   return params;
 }
