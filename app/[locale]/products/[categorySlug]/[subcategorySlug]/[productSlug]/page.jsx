@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { client, urlFor } from '@/sanity/client';
+import ProductImageLightbox from '@/components/product/ProductImageLightbox';
 import {
   CATEGORIES_QUERY,
   SUBCATEGORIES_BY_CATEGORY_QUERY,
@@ -148,7 +149,7 @@ export default async function ProductPage({ params }) {
   const subcategoryTitle  = product?.subcategoryTitle?.[locale]   || product?.subcategoryTitle?.en   || subcategorySlug.replace(/-/g, ' ');
 
   const bannerUrl         = product?.bannerImage ? urlFor(product.bannerImage).width(1600).height(600).url() : null;
-  const productImageUrl   = product?.image       ? urlFor(product.image).width(800).height(800).url()        : null;
+  const productImageUrl   = product?.image       ? urlFor(product.image).url()        : null;
 
   const featuresContent   = product?.featuresAndBenefits?.[locale] || product?.featuresAndBenefits?.en || null;
   const compositionContent = product?.description?.[locale]        || product?.description?.en        || null;
@@ -218,10 +219,11 @@ export default async function ProductPage({ params }) {
       {/* ─── Page Body ─── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-8">
 
-        {/* ━━━ TOP: Product Intro ━━━ */}
-        <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6 lg:gap-8 items-start">
 
-          {/* Image Card */}
+        {/* ━━━ TOP: Product Intro ━━━ */}
+        <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-6 lg:gap-8 items-start">
+
+          {/* --- BACKUP: ORIGINAL PRODUCT IMAGE (DO NOT DELETE) ---
           <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
             <div className="relative aspect-square w-full">
               {productImageUrl ? (
@@ -235,6 +237,10 @@ export default async function ProductPage({ params }) {
               )}
             </div>
           </div>
+          --- END BACKUP --- */}
+
+          {/* Image Card — Vertical Poster (4096×6144 ≈ 2:3 ratio) with Lightbox */}
+          <ProductImageLightbox src={productImageUrl} alt={title} />
 
           {/* Details Card */}
           <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 md:p-8 flex flex-col text-start h-full">

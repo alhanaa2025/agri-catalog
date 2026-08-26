@@ -125,7 +125,7 @@ export default async function SubcategoryPage({ params }) {
             <div className={gridClass}>
               {products.map((product) => {
                 const imageUrl = product.image
-                  ? urlFor(product.image).width(600).height(600).url()
+                  ? urlFor(product.image).width(400).height(600).url()
                   : null;
                 const title = product.title?.[locale] || product.title?.en || '';
 
@@ -135,14 +135,15 @@ export default async function SubcategoryPage({ params }) {
                     href={`/${locale}/products/${categorySlug}/${subcategorySlug}/${product.slug}`}
                     className="group flex flex-col rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 bg-white border border-gray-100"
                   >
-                    {/* Product Image */}
-                    <div className="relative aspect-square w-full overflow-hidden bg-gray-50">
+                    {/* Product Image — tall poster, no cropping */}
+                    <div className="relative w-full aspect-[2/3] bg-white overflow-hidden">
                       {imageUrl ? (
                         <Image
                           src={imageUrl}
                           alt={title}
                           fill
-                          className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                          className="object-contain group-hover:scale-105 transition-transform duration-500"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100">
