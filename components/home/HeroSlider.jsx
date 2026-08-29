@@ -38,7 +38,7 @@ export default function HeroSlider({ slides, locale }) {
   };
 
   return (
-    <div className="relative w-full h-[80vh] md:h-[600px] overflow-hidden bg-[#131b2f]">
+    <div className="relative w-full aspect-[2/3] md:aspect-auto md:h-[600px] overflow-hidden bg-[#131b2f]">
       {slides.map((slide, index) => {
         const imageUrl = slide.image ? urlFor(slide.image).url() : '';
         const caption = slide.caption?.[locale] || '';
@@ -60,7 +60,7 @@ export default function HeroSlider({ slides, locale }) {
                 alt={caption || 'Hero slide'}
                 fill
                 priority={index === 0}
-                className="object-contain w-full h-full md:object-cover"
+                className="object-cover w-full h-full"
               />
             )}
             
