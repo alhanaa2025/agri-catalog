@@ -43,7 +43,7 @@ export default function ProductImageLightbox({ src, alt }) {
               src={src}
               alt={alt}
               fill
-              className="object-contain object-top transition-transform duration-300 group-hover:scale-[1.02]"
+              className="object-contain object-top w-full h-full transition-transform duration-300 group-hover:scale-[1.02]"
               sizes="(max-width: 768px) 100vw, 420px"
             />
             {/* Zoom hint overlay */}

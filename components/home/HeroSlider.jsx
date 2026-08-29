@@ -17,7 +17,7 @@ export default function HeroSlider({ slides, locale }) {
 
   if (!slides || slides.length === 0) {
     return (
-      <div className="w-full h-[600px] bg-gray-100 flex items-center justify-center">
+      <div className="w-full h-[80vh] md:h-[600px] bg-gray-100 flex items-center justify-center">
         <h2 className="text-2xl text-gray-400 font-semibold opacity-50">
           No slides available
         </h2>
@@ -38,9 +38,9 @@ export default function HeroSlider({ slides, locale }) {
   };
 
   return (
-    <div className="relative w-full h-[600px] overflow-hidden">
+    <div className="relative w-full h-[80vh] md:h-[600px] overflow-hidden bg-[#131b2f]">
       {slides.map((slide, index) => {
-        const imageUrl = slide.image ? urlFor(slide.image).width(1920).height(1080).url() : '';
+        const imageUrl = slide.image ? urlFor(slide.image).url() : '';
         const caption = slide.caption?.[locale] || '';
         const state = getSlideState(index, currentIndex, slides.length);
         const currentStyle = slideStyles[state];
@@ -60,7 +60,7 @@ export default function HeroSlider({ slides, locale }) {
                 alt={caption || 'Hero slide'}
                 fill
                 priority={index === 0}
-                className="object-cover"
+                className="object-contain w-full h-full md:object-cover"
               />
             )}
             

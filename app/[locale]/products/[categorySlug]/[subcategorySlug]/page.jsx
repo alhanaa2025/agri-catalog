@@ -142,7 +142,7 @@ export default async function SubcategoryPage({ params }) {
                           src={imageUrl}
                           alt={title}
                           fill
-                          className="object-contain group-hover:scale-105 transition-transform duration-500"
+                          className="object-contain object-top w-full h-full group-hover:scale-105 transition-transform duration-500"
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         />
                       ) : (
